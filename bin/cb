@@ -1,0 +1,77 @@
+#!/bin/sh
+
+case $(uname -s | tr '[:upper:]' '[:lower:]') in
+	darwin*)
+        clipcopy() { printf '%b' "${1}" | pbcopy; }
+        clippaste() { pbpaste; }
+	;;
+	cygwin*|msys*)
+        if command -v clip.exe >/dev/null && command -v powershell.exe >/dev/null; then
+            clipcopy() { printf '%b' "${1}" | clip.exe; }
+            clippaste() { powershell.exe -noprofile -command Get-Clipboard; }
+        else
+            clipcopy() { printf '%b' "${1}" > /dev/clipboard; }
+            clippaste() { cat /dev/clipboard; }
+        fi
+	;;
+	linux-android*)
+        if command -v termux-clipboard-set >/dev/null && command -v termux-clipboard-set >/dev/null; then
+            clipcopy() { printf '%b' "${1}" | termux-clipboard-set; }
+            clippaste() { termux-clipboard-get; }
+        else
+            printf '%s\n%s\n' \
+                "cb: Can't interact with Termux's clipboard" \
+                "Please install 'termux-api'" >&2
+            exit 1
+        fi
+	;;
+	*)
+		if [ -n "${WAYLAND_DISPLAY}" ]; then
+			if command -v wl-copy >/dev/null && command -v wl-paste >/dev/null; then
+                clipcopy() { printf '%b' "${1}" | wl-copy >/dev/null 2>&1; }
+                clippaste() { wl-paste; }
+			else
+				printf '%s\n%s\n' \
+                    "cb: Can't interact with Wayland's clipboard" \
+				    "Please install 'wl-clipboard'" >&2
+				exit 1
+			fi
+		elif [ -n "${DISPLAY}" ]; then
+			if command -v xclip >/dev/null; then
+                clipcopy() { printf '%b' "${1}" | xclip -selection clipboard -in >/dev/null 2>&1; }
+                clippaste() { xclip -out -selection clipboard; }
+			elif command -v xsel >/dev/null; then
+                clipcopy() { printf '%b' "${1}" | xsel --clipboard --input; }
+                clippaste() { xsel --clipboard --output; }
+			else
+				printf '%s\n%s\n' \
+                    "cb: Can't interact with Xorg's clipboard" \
+				    "Please install 'xclip' or 'xsel'" >&2
+				exit 1
+			fi
+		else
+			if [ -n "${TMUX:-}" ] && command -v tmux >/dev/null; then
+                clipcopy() { tmux load-buffer "${1:--}"; }
+                clippaste() { tmux save-buffer -; }
+			elif command -v lemonade >/dev/null; then
+                clipcopy() { printf '%b' "${1}" | lemonade copy; }
+                clippaste() { lemonade paste; }
+			elif command -v doitclient >/dev/null; then
+                clipcopy() { printf '%b' "${1}" | doitclient wclip; }
+                clippaste() { doitclient wclip -r; }
+			elif command -v win32yank >/dev/null; then
+                clipcopy() { printf '%b' "${1}" | win32yank -i; }
+                clippaste() { win32yank -o; }
+			else
+                printf '%s\n' "cb: This system is not supported" >&2
+				exit 1
+			fi
+		fi
+	;;
+esac
+
+if [ -n "${1}" ] || [ -p '/dev/stdin' ]; then
+    clipcopy "${1:-$(cat /dev/stdin)}"
+else
+    clippaste
+fi
