@@ -1,0 +1,9 @@
+{
+  "name": "cb",
+  "version": "1.0.0",
+  "description": "Clipboard managers warper written in POSIX sh",
+  "global": "true",
+  "scripts": ["bin/cb"],
+  "files": ["man/cb.1"],
+  "install": "make install"
+}
