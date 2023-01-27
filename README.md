@@ -5,6 +5,7 @@
 ## 💡 About
 
 `cb` is a clipboard managers warper written in POSIX sh that wraps various system-specific tools for interacting with a system clipboard.
+This is literally a port of [`clipboard.zsh` plugin](https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/clipboard.zsh) from [Oh My Zsh](https://github.com/ohmyzsh) as a stand alone utility.
 
 ### ✨ Features
 
