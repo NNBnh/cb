@@ -1,6 +1,6 @@
 <h1 align="center"><code>cb</code></h1>
 <p align="center">Clipboard managers warper written in POSIX sh</p>
-<p align="center"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/281/clipboard_1f4cb.png"></p>
+<p align="center"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/281/clipboard_1f4cb.png" /></p>
 
 ## 💡 About
 
@@ -82,4 +82,4 @@ cb | other-tool
 Special thanks to:
 - [**clipboard.zsh**](https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/clipboard.zsh) from [Oh My Zsh](https://github.com/ohmyzsh)
 
-<a href="https://codeberg.org/NNB"><img width="100%" src="https://capsule-render.vercel.app/api?type=waving&section=footer&color=0284C7&fontColor=F0F9FF&height=128&desc=Made%20with%20%26lt;3%20by%20NNB&descAlignY=80"/></a>
+<a href="https://codeberg.org/NNB"><img width="100%" src="https://capsule-render.vercel.app/api?type=waving&section=footer&color=0284C7&fontColor=F0F9FF&height=128&desc=Made%20with%20%26lt;3%20by%20NNB&descAlignY=80" /></a>
