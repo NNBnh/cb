@@ -71,8 +71,9 @@ case $(uname -s | tr '[:upper:]' '[:lower:]') in
 esac
 
 if [ -n "${1}" ] || [ -p '/dev/stdin' ]; then
-    clipcopy "${1:-$(cat /dev/stdin)}"
-    [ ! -t 1 ] && printf '%b' "${1:-$(cat /dev/stdin)}"
+    copy_string="${1:-$(cat /dev/stdin)}"
+    clipcopy "${copy_string}"
+    [ ! -t 1 ] && printf '%b' "${copy_string}"
 else
     clippaste
 fi
