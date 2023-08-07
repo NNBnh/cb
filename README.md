@@ -81,7 +81,7 @@ cb | other-tool
 Special thanks to:
 - [**clipboard.zsh**](https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/clipboard.zsh) from [Oh My Zsh](https://github.com/ohmyzsh)
 
-<a href="https://github.com/NNBnh">
+<a href="https://nnb.codeberg.page">
   <img
     width="100%"
     src="https://capsule-render.vercel.app/api?type=waving&section=footer&color=0284C7&fontColor=F0F9FF&height=128&desc=Made%20with%20%26lt;3%20by%20NNB&descAlignY=80"
